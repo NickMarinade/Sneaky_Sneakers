@@ -12,7 +12,7 @@ function App() {
         </div>
         <div>
         <ul className="headerRight">
-          <li><img width={18} height={18} src="/img/cart.svg" alt="" /> <span>127 eur.</span></li>
+          <li><img width={18} height={18} src="/img/cart.svg" alt="" /> <span>127&#8364;</span></li>
           <li><img width={18} height={18} src="/img/user.svg" alt="" /></li>
         </ul>
         </div>
