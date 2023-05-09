@@ -17,9 +17,21 @@ function App() {
         </ul>
         </div>
       </header>
+
       <div className="content">
         <h1>All Sneakers</h1>
-        <p>...</p>
+        <img src="" alt="" />
+        <p></p>
+        <div>
+          <div>
+            <span></span>
+            <b>Price: 123&#8364;</b>
+          </div>
+        </div>
+        <button></button>
+        <div className="card">
+
+        </div>
       </div>
     </div>
   );
