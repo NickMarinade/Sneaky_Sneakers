@@ -1,11 +1,67 @@
 function App() {
   return (
     <div className="wrapper">
+      <div className="overlay">
+        <div className="drawer">
+          <h2>Cart <img className="removeBtn" src="/img/btn-remove.svg" alt="Remove" /></h2>
+          <div className="items">
+
+          <div className="cartItem">
+            <img
+              width={90}
+              height={90}
+              src="/img/sneakers/Peak_Lou_Williams_3_CherryBlossom.png"
+              alt="Sneakers"
+            />
+            <div className="cartItemPrice">
+              <p>Peak Lou Williams 3 'Cherry Blossom'</p>
+              <b>80&#8364;</b>
+            </div>
+            <img className="removeBtn" src="/img/btn-remove.svg" alt="Remove" />
+          </div>
+
+          <div className="cartItem">
+            <img
+              width={90}
+              height={90}
+              src="/img/sneakers/Peak_Lou_Williams_3_CherryBlossom.png"
+              alt="Sneakers"
+            />
+            <div className="cartItemPrice">
+              <p>Peak Lou Williams 3 'Cherry Blossom'</p>
+              <b>80&#8364;</b>
+            </div>
+            <img className="removeBtn" src="/img/btn-remove.svg" alt="Remove" />
+          </div>
+
+          </div>
+
+          <div className="cartTotalBlock">
+
+          <ul>
+            <li>
+              <span>Summary:</span>
+              <div></div>
+              <b>80&#8364;</b>
+            </li>
+            <li>
+              <span>BTW 21% : </span>
+              <div></div>
+              <b>17&#8364;</b>
+            </li>
+          </ul>
+          <button className="greenButton">Proceed with order <img src="/img/arrow.svg" alt="Arrow" /></button>
+
+          </div>
+
+        </div>
+      </div>
+
       <header>
         <div className="headerLeft">
           <img width={50} height={50} src="/img/logo.png" alt="" />
           <div className="headerInfo">
-            <h3>Sneaky Sneakers</h3>
+            <h2>Sneaky Sneakers</h2>
             <p>Find your sneaky ones</p>
           </div>
         </div>
@@ -24,17 +80,17 @@ function App() {
 
       <div className="content">
         <div className="contentHeader">
-        <h1>All Sneakers</h1>
-        <div className="search-block">
-          <img src="/img/search.svg" alt="Search" />
-          <input placeholder="Search..."/>
-        </div>
+          <h1>All Sneakers</h1>
+          <div className="search-block">
+            <img src="/img/search.svg" alt="Search" />
+            <input placeholder="Search..." />
+          </div>
         </div>
 
         <div className="sneakers">
           <div className="card">
             <div className="favorite">
-            <img src="/img/unliked.svg" alt="Unliked" />
+              <img src="/img/unliked.svg" alt="Unliked" />
             </div>
             <img
               width={153}
@@ -61,7 +117,9 @@ function App() {
               src="/img/sneakers/Kyrie_Infinity_Rattan.jpg"
               alt="Sneakers"
             />
-            <h5>Kyrie Infinity <br /> 'Rattan'</h5>
+            <h5>
+              Kyrie Infinity <br /> 'Rattan'
+            </h5>
             <div className="cardBottom">
               <div className="cardPrice">
                 <span>Price:</span>
@@ -99,7 +157,9 @@ function App() {
               src="/img/sneakers/Tatum1_Zoo.png"
               alt="Sneakers"
             />
-            <h5>Tatum 1 <br /> 'Zoo'</h5>
+            <h5>
+              Tatum 1 <br /> 'Zoo'
+            </h5>
             <div className="cardBottom">
               <div className="cardPrice">
                 <span>Price:</span>
@@ -129,7 +189,6 @@ function App() {
               </button>
             </div>
           </div> */}
-          
         </div>
       </div>
     </div>
