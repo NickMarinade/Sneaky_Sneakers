@@ -1,24 +1,31 @@
-const Card = () => {
+import { useState } from "react";
+
+const Card = (props) => {
+
+  const [isAdded, setIsAdded] = useState(false);
+
+  const onClickPlus = () => {
+    setIsAdded(!isAdded)
+  }
+
     return (
         <div className="card">
-  <div className="favorite">
+  <div className="favorite" onClick={props.onFavorite}>
     <img src="/img/unliked.svg" alt="Unliked" />
   </div>
   <img
     width={153}
     height={132}
-    src="/img/sneakers/Jordan_Stay_Loyal2.png"
+    src={props.imageUrl}
     alt="Sneakers"
   />
-  <h5>Jordan Stay Loyal 2 'Black/White/Red'</h5>
+  <h5>{props.title}</h5>
   <div className="cardBottom">
     <div className="cardPrice">
       <span>Price:</span>
-      <b>60&#8364;</b>
+      <b>{props.price}&#8364;</b>
     </div>
-    <button className="button">
-      <img width={11} height={11} src="/img/plus.svg" alt="Plus" />
-    </button>
+      <img className="plus" onClick={onClickPlus} src={isAdded ? "/img/btn-checked.svg" : "/img/btn-plus.svg"} alt="Plus" />
   </div>
 </div>
     );
