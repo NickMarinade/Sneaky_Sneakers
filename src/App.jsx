@@ -7,7 +7,7 @@ import axios from "axios";
 function App() {
 
   const [items, setItems] = useState([]);
-
+  const [cartItems, setCartItems] = useState([{"title":"Jordan Stay Loyal 2 Black/Red","price":60,"imgUrl":"/img/sneakers/Jordan_Stay_Loyal2.png"},{"title":"Kyrie Infinity Rattan","price":120,"imgUrl":"/img/sneakers/Kyrie_Infinity_Rattan.jpg"}]);
   const [cartOpened, setCartOpened] = useState(false);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ function App() {
 
   return (
     <div className="wrapper">
-      {cartOpened && <Drawer onClose={() => setCartOpened(false)}/>}
+      {cartOpened && <Drawer items={cartItems} onClose={() => setCartOpened(false)}/>}
       <Header onClickCart={() => setCartOpened(true)}/>
 
       <div className="content">
