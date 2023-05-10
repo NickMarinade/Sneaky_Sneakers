@@ -1,4 +1,4 @@
-const Header = () => {
+const Header = (props) => {
     return (
         <header>
         <div className="headerLeft">
@@ -11,7 +11,7 @@ const Header = () => {
         <div>
           <ul className="headerRight">
             <li>
-              <img width={18} height={18} src="/img/cart.svg" alt="Cart" />{" "}
+              <img onClick={props.onClickCart} className="cartImg" width={18} height={18} src="/img/cart.svg" alt="Cart" />{" "}
               <span>127&#8364;</span>
             </li>
             <li>

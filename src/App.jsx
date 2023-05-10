@@ -1,6 +1,7 @@
 import Card from "./components/Card";
 import Header from "./components/Header";
 import Drawer from "./components/Drawer";
+import { useState } from "react";
 
 const sneakers = [
   {title: 'Jordan Stay Loyal 2', price: 60, imgUrl: '/img/sneakers/Jordan_Stay_Loyal2.png'},
@@ -8,10 +9,13 @@ const sneakers = [
 ]
 
 function App() {
+
+  const [cartOpened, setCartOpened] = useState(false);
+
   return (
     <div className="wrapper">
-      <Drawer />
-      <Header />
+      {cartOpened && <Drawer onClose={() => setCartOpened(false)}/>}
+      <Header onClickCart={() => setCartOpened(true)}/>
 
       <div className="content">
         <div className="contentHeader">
@@ -29,7 +33,7 @@ function App() {
           price = {sneaker.price}
           imageUrl = {sneaker.imgUrl}
           onPlus = {() => console.log('added to basket')} 
-          onFavorite = {() => console.log('added to favoritte')} 
+          onFavorite = {() => console.log('added to favorite')} 
         />
           )}
         </div>

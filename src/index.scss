@@ -203,6 +203,10 @@ body {
     .headerRight {
       display: flex;
 
+      .cartImg {
+        cursor: pointer;
+      }
+
       li {
         margin-right: 30px !important;
       }

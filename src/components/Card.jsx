@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {  useState } from "react";
 
 const Card = (props) => {
 
@@ -7,6 +7,7 @@ const Card = (props) => {
   const onClickPlus = () => {
     setIsAdded(!isAdded)
   }
+
 
     return (
         <div className="card">
