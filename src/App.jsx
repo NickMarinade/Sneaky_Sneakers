@@ -1,16 +1,24 @@
 import Card from "./components/Card";
 import Header from "./components/Header";
 import Drawer from "./components/Drawer";
-import { useState } from "react";
-
-const sneakers = [
-  {title: 'Jordan Stay Loyal 2', price: 60, imgUrl: '/img/sneakers/Jordan_Stay_Loyal2.png'},
-  {title: 'Kyrie Infinity Rattan', price: 120, imgUrl: '/img/sneakers/Kyrie_Infinity_Rattan.jpg'}
-]
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function App() {
 
+  const [items, setItems] = useState([]);
+
   const [cartOpened, setCartOpened] = useState(false);
+
+  useEffect(() => {
+    axios.get('https://645b967399b618d5f31f8c71.mockapi.io/items')
+      .then((response) => {
+        setItems(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []); 
 
   return (
     <div className="wrapper">
@@ -26,8 +34,8 @@ function App() {
           </div>
         </div>
 
-        <div className="sneakers">
-          {sneakers.map((sneaker) => 
+        <div className="sneakers"> 
+          {items.map((sneaker) => 
           <Card
           title = {sneaker.title}
           price = {sneaker.price}

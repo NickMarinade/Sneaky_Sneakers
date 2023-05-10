@@ -241,6 +241,7 @@ body {
 
   .sneakers {
     display: flex;
+    flex-wrap: wrap;
   }
 
   .card {
@@ -249,6 +250,7 @@ body {
     width: 220px;
     border-radius: 40px;
     margin-right: 30px;
+    margin-bottom: 30px;
     transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
 
     .plus {
