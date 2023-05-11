@@ -19,9 +19,20 @@ function App() {
       .catch((error) => {
         console.error(error);
       });
+
+      axios
+      .get("https://645b967399b618d5f31f8c71.mockapi.io/cart")
+      .then((response) => {
+        setCartItems(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
 
   const onAddToCart = (sneakers) => {
+    axios.post("https://645b967399b618d5f31f8c71.mockapi.io/cart", sneakers);
+
     setCartItems((prev) => {
       const isSneakersAlreadyAdded = prev.some(
         (item) => item.title === sneakers.title
