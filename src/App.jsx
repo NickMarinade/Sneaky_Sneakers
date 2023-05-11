@@ -7,7 +7,7 @@ import axios from "axios";
 function App() {
 
   const [items, setItems] = useState([]);
-  const [cartItems, setCartItems] = useState([{"title":"Jordan Stay Loyal 2 Black/Red","price":60,"imgUrl":"/img/sneakers/Jordan_Stay_Loyal2.png"},{"title":"Kyrie Infinity Rattan","price":120,"imgUrl":"/img/sneakers/Kyrie_Infinity_Rattan.jpg"}]);
+  const [cartItems, setCartItems] = useState([]);
   const [cartOpened, setCartOpened] = useState(false);
 
   useEffect(() => {
@@ -19,6 +19,19 @@ function App() {
         console.error(error);
       });
   }, []); 
+
+  const onAddToCart = (sneakers) => {
+    setCartItems(prev => {
+
+      const isSneakersAlreadyAdded = prev.some(item => item.title === sneakers.title);
+  
+      if (isSneakersAlreadyAdded) {
+        return prev.filter(item => item.title !== sneakers.title);
+      } else {
+        return [...prev, sneakers];
+      }
+    });
+  }
 
   return (
     <div className="wrapper">
@@ -35,12 +48,12 @@ function App() {
         </div>
 
         <div className="sneakers"> 
-          {items.map((sneaker) => 
+          {items.map((item) => 
           <Card
-          title = {sneaker.title}
-          price = {sneaker.price}
-          imageUrl = {sneaker.imgUrl}
-          onPlus = {() => console.log('added to basket')} 
+          title = {item.title}
+          price = {item.price}
+          imgUrl = {item.imgUrl}
+          onPlus = {(sneakers) => onAddToCart(sneakers)} 
           onFavorite = {() => console.log('added to favorite')} 
         />
           )}

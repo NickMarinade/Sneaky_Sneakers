@@ -9,17 +9,17 @@ const Drawer = ({onClose, items=[]}) => {
         </h2>
         <div className="items">
           {
-            items.map((obj) => (
+            items.map((item) => (
               <div className="cartItem">
             <img
               width={90}
               height={90}
-              src={obj.imgUrl}
+              src={item.imgUrl}
               alt="Sneakers"
             />
             <div className="cartItemPrice">
-              <p>{obj.title}</p>
-              <b>{obj.price}&#8364;</b>
+              <p>{item.title}</p>
+              <b>{item.price}&#8364;</b>
             </div>
             <img className="removeBtn" src="/img/btn-remove.svg" alt="Remove" />
           </div>
