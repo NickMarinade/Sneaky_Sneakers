@@ -2,7 +2,7 @@ const Header = (props) => {
     return (
         <header>
         <div className="headerLeft">
-          <img width={50} height={50} src="/img/logo.png" alt="" />
+          <img width={50} height={50} src="/img/logo.png" alt="Logo" />
           <div className="headerInfo">
             <h2>Sneaky Sneakers</h2>
             <p>Find your sneaky ones</p>
