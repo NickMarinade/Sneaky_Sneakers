@@ -6,7 +6,7 @@
 }
 
 body {
-  background-color: #e7f6ff;
+  background-color: #fff4e7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -288,6 +288,46 @@ body {
     .cardPrice {
       display: flex;
       flex-direction: column;
+    }
+  }
+
+  .cartEmpty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    flex: 1;
+
+    img {
+      margin-bottom: 20px;
+    }
+
+    p {
+      width: 280px;
+      opacity: 0.6;
+      line-height: 24px;
+    }
+
+    .greenButton {
+      position: relative;
+      width: 245px;
+      margin-top: 20px;
+
+      &:hover {
+        img {
+          transform: rotate(180deg) translateX(5px);
+        }
+      }
+
+      img {
+        position: absolute;
+        right: 30px;
+        top: 20px;
+        transform: rotate(180deg);
+        margin-right: 175px;
+        transition: transform 0.15s ease-in-out;
+      }
     }
   }
 

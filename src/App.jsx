@@ -15,35 +15,37 @@ function App() {
       .get("https://645b967399b618d5f31f8c71.mockapi.io/items")
       .then((response) => {
         setItems(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
       });
 
-      axios
+    axios
       .get("https://645b967399b618d5f31f8c71.mockapi.io/cart")
       .then((response) => {
         setCartItems(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
       });
   }, []);
 
   const onAddToCart = (sneakers) => {
-    axios.post("https://645b967399b618d5f31f8c71.mockapi.io/cart", sneakers);
+    axios
+      .post("https://645b967399b618d5f31f8c71.mockapi.io/cart", sneakers)
+      .then(() => {
+        setCartItems((prev) => [...prev, sneakers]);
+      })
+      .then(() => {
+        // Fetch the updated cart items after adding an item
+        axios
+          .get("https://645b967399b618d5f31f8c71.mockapi.io/cart")
+          .then((response) => {
+            setCartItems(response.data);
+          });
+      })
+      .catch((error) => {
+        console.error("Error adding item to cart:", error);
+      });
+  };
 
-    setCartItems((prev) => {
-      const isSneakersAlreadyAdded = prev.some(
-        (item) => item.title === sneakers.title
-      );
-
-      if (isSneakersAlreadyAdded) {
-        return prev.filter((item) => item.title !== sneakers.title);
-      } else {
-        return [...prev, sneakers];
-      }
-    });
+  const onRemoveItem = (id) => {
+    axios.delete(`https://645b967399b618d5f31f8c71.mockapi.io/cart/${id}`);
+    setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
   const onChangeSearchInput = (e) => {
@@ -53,7 +55,11 @@ function App() {
   return (
     <div className="wrapper">
       {cartOpened && (
-        <Drawer items={cartItems} onClose={() => setCartOpened(false)} />
+        <Drawer
+          items={cartItems}
+          onClose={() => setCartOpened(false)}
+          onRemove={onRemoveItem}
+        />
       )}
       <Header onClickCart={() => setCartOpened(true)} />
 
@@ -75,16 +81,20 @@ function App() {
         </div>
 
         <div className="sneakers">
-          {items.filter(item => item.title.toLowerCase().includes(searchValue.toLowerCase())).map((item) => (
-            <Card
-              key={item.title}
-              title={item.title}
-              price={item.price}
-              imgUrl={item.imgUrl}
-              onPlus={(sneakers) => onAddToCart(sneakers)}
-              onFavorite={() => console.log("added to favorite")}
-            />
-          ))}
+          {items
+            .filter((item) =>
+              item.title.toLowerCase().includes(searchValue.toLowerCase())
+            )
+            .map((item) => (
+              <Card
+                key={item.title}
+                title={item.title}
+                price={item.price}
+                imgUrl={item.imgUrl}
+                onPlus={(sneakers) => onAddToCart(sneakers)}
+                onFavorite={() => console.log("added to favorite")}
+              />
+            ))}
         </div>
       </div>
     </div>
