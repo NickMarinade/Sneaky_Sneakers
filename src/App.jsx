@@ -7,6 +7,7 @@ import axios from "axios";
 function App() {
   const [items, setItems] = useState([]);
   const [cartItems, setCartItems] = useState([]);
+  const [favorites, setFavorites] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [cartOpened, setCartOpened] = useState(false);
 
@@ -40,6 +41,25 @@ function App() {
       })
       .catch((error) => {
         console.error("Error adding item to cart:", error);
+      });
+  };
+
+  const onAddToFavorites = (sneakers) => {
+    axios
+      .post("https://645e3b308d08100293fa31ac.mockapi.io/favorites", sneakers)
+      .then(() => {
+        setFavorites((prev) => [...prev, sneakers]);
+      })
+      .then(() => {
+        // Fetch the updated cart items after adding an item
+        axios
+          .get("https://645e3b308d08100293fa31ac.mockapi.io/favorites")
+          .then((response) => {
+            setCartItems(response.data);
+          });
+      })
+      .catch((error) => {
+        console.error("Error adding item to favorites:", error);
       });
   };
 
@@ -87,12 +107,12 @@ function App() {
             )
             .map((item) => (
               <Card
-                key={item.title}
+                key={item.id}
                 title={item.title}
                 price={item.price}
                 imgUrl={item.imgUrl}
                 onPlus={(sneakers) => onAddToCart(sneakers)}
-                onFavorite={() => console.log("added to favorite")}
+                onFavorite={(sneakers) => onAddToFavorites(sneakers)}
               />
             ))}
         </div>
