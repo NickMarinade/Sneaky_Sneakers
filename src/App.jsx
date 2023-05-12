@@ -2,6 +2,7 @@ import Card from "./components/Card";
 import Header from "./components/Header";
 import Drawer from "./components/Drawer";
 import { useEffect, useState } from "react";
+import { Route, Routes } from "react-router-dom";
 import axios from "axios";
 
 function App() {
@@ -55,7 +56,7 @@ function App() {
         axios
           .get("https://645e3b308d08100293fa31ac.mockapi.io/favorites")
           .then((response) => {
-            setCartItems(response.data);
+            setFavorites(response.data);
           });
       })
       .catch((error) => {
@@ -82,6 +83,10 @@ function App() {
         />
       )}
       <Header onClickCart={() => setCartOpened(true)} />
+
+      {/* <Routes>
+      <Route path="/favorites" exact element={<div>test routing</div>}  />
+      </Routes> */}
 
       <div className="content">
         <div className="contentHeader">
