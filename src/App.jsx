@@ -1,6 +1,7 @@
-import Card from "./components/Card";
 import Header from "./components/Header";
 import Drawer from "./components/Drawer";
+import Home from "./pages/Home";
+import Favorites from "./pages/Favorites";
 import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import axios from "axios";
@@ -84,44 +85,37 @@ function App() {
       )}
       <Header onClickCart={() => setCartOpened(true)} />
 
-      {/* <Routes>
-      <Route path="/favorites" exact element={<div>test routing</div>}  />
-      </Routes> */}
-
-      <div className="content">
-        <div className="contentHeader">
-          <h1>
-            {searchValue
-              ? `Search results for: ${searchValue}`
-              : "All Sneakers"}
-          </h1>
-          <div className="search-block">
-            <img src="/img/search.svg" alt="Search" />
-            <input
-              onChange={onChangeSearchInput}
-              value={searchValue}
-              placeholder="Search..."
+      <Routes>
+        <Route
+          path="/"
+          exact
+          element={
+            <Home
+              items={items}
+              searchValue={searchValue}
+              setSearchValue={setSearchValue}
+              onChangeSearchInput={onChangeSearchInput}
+              onAddToFavorites={onAddToFavorites}
+              onAddToCart={onAddToCart}
             />
-          </div>
-        </div>
+          }
+        />
 
-        <div className="sneakers">
-          {items
-            .filter((item) =>
-              item.title.toLowerCase().includes(searchValue.toLowerCase())
-            )
-            .map((item) => (
-              <Card
-                key={item.id}
-                title={item.title}
-                price={item.price}
-                imgUrl={item.imgUrl}
-                onPlus={(sneakers) => onAddToCart(sneakers)}
-                onFavorite={(sneakers) => onAddToFavorites(sneakers)}
-              />
-            ))}
-        </div>
-      </div>
+        <Route
+          path="/favorites"
+          exact
+          element={
+            <Favorites
+              items={items}
+              searchValue={searchValue}
+              setSearchValue={setSearchValue}
+              onChangeSearchInput={onChangeSearchInput}
+              onAddToFavorites={onAddToFavorites}
+              onAddToCart={onAddToCart}
+            />
+          }
+        />
+      </Routes>
     </div>
   );
 }
