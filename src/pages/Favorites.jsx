@@ -1,25 +1,23 @@
+import Card from "../components/Card";
 
-function Favorites({items, searchValue, setSearchValue, onChangeSearchInput, onAddToFavorites, onAddToCart}) {
+function Favorites({items, onAddToFavorites}) {
     return (
         <div className="content">
         <div className="contentHeader">
-          <h1>
-            {searchValue
-              ? `Search results for: ${searchValue}`
-              : "All Sneakers"}
-          </h1>
-          <div className="search-block">
-            <img src="/img/search.svg" alt="Search" />
-            <input
-              onChange={onChangeSearchInput}
-              value={searchValue}
-              placeholder="Search..."
-            />
-          </div>
+          <h1>My Favorites</h1>
+
         </div>
 
         <div className="sneakers">
-          Here are favorites
+        {items
+            .map((item) => (
+              <Card
+                key={item.id}
+                ifFavorite={true}
+                onFavorite={onAddToFavorites}
+                {...item}
+              />
+            ))}
         </div>
       </div>
     )
