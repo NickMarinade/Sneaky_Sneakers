@@ -1,6 +1,28 @@
 import Card from "../components/Card";
 
-function Home({items, searchValue, setSearchValue, onChangeSearchInput, onAddToFavorites, onAddToCart}) {
+function Home({items, cartItems, searchValue, setSearchValue, onChangeSearchInput, onAddToFavorites, onAddToCart, isLoading}) {
+
+  const renderItems = () => {
+
+    if (!items) {
+      return console.log('items undefined'); // or any other fallback you want to show when items is undefined
+    }
+
+
+    const filteredItems = items.filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()));
+    return (isLoading ? [...Array(8)] : filteredItems).map((item, index) => (
+              <Card
+                key={index}
+                onPlus={(obj) => onAddToCart(obj)}
+                onFavorite={(obj) => onAddToFavorites(obj)}
+                ifAdded={cartItems.some(obj => Number(obj.id) === Number(item.id))}
+                ifLoading={isLoading}
+                {...item}
+              />
+            ))
+  }
+
+  
     return (
         <div className="content">
         <div className="contentHeader">
@@ -20,18 +42,7 @@ function Home({items, searchValue, setSearchValue, onChangeSearchInput, onAddToF
         </div>
 
         <div className="sneakers">
-          {items
-            .filter((item) =>
-              item.title.toLowerCase().includes(searchValue.toLowerCase())
-            )
-            .map((item) => (
-              <Card
-                key={item.id}
-                onPlus={(sneakers) => onAddToCart(sneakers)}
-                onFavorite={(sneakers) => onAddToFavorites(sneakers)}
-                {...item}
-              />
-            ))}
+          {renderItems()}
         </div>
       </div>
     )
