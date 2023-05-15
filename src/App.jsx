@@ -1,10 +1,15 @@
 import Header from "./components/Header";
 import Drawer from "./components/Drawer";
-import Home from "./pages/Home";
-import Favorites from "./pages/Favorites";
-import { useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import axios from "axios";
+import AppContext from "./context";
+
+import Home from "./pages/Home";
+import Favorites from "./pages/Favorites";
+
+
+
 
 function App() {
   const [items, setItems] = useState([]);
@@ -67,7 +72,8 @@ function App() {
   };
 
   return (
-    <div className="wrapper">
+    <AppContext.Provider value={ {items, cartItems, favorites} }>
+      <div className="wrapper">
       {cartOpened && (
         <Drawer
           items={cartItems}
@@ -100,13 +106,13 @@ function App() {
           exact
           element={
             <Favorites
-              items={favorites}
               onAddToFavorites={onAddToFavorites} 
             />
           }
         />
       </Routes>
     </div>
+    </AppContext.Provider>
   );
 }
 

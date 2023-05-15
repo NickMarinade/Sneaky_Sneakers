@@ -1,6 +1,10 @@
+import { useContext } from "react";
 import Card from "../components/Card";
+import AppContext from "../context";
 
-function Favorites({items, onAddToFavorites}) {
+function Favorites({ onAddToFavorites }) {
+  const { favorites } = useContext(AppContext);
+
     return (
         <div className="content">
         <div className="contentHeader">
@@ -9,7 +13,7 @@ function Favorites({items, onAddToFavorites}) {
         </div>
 
         <div className="sneakers">
-        {items
+        {favorites
             .map((item) => (
               <Card
                 key={item.id}

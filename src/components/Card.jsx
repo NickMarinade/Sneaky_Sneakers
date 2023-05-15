@@ -1,12 +1,12 @@
 import { useState } from "react";
 import ContentLoader from "react-content-loader";
 
-const Card = ({ id, onFavorite, imgUrl, title, price, onPlus, ifFavorite = false, ifAdded = false, ifLoading = false }) => {
+function Card({ id, onFavorite, imgUrl, title, price, onPlus, ifFavorite = false, ifAdded = false, ifLoading = false }) {
   const [isAdded, setIsAdded] = useState(ifAdded);
   const [isFavorite, setIsFavorite] = useState(ifFavorite);
 
   const onClickPlus = () => {
-    onPlus({ imgUrl, title, price });
+    onPlus({ id, imgUrl, title, price });
     setIsAdded(!isAdded);
   };
 
