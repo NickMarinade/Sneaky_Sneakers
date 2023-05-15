@@ -1,13 +1,8 @@
 import Card from "../components/Card";
 
-function Home({items, cartItems, searchValue, setSearchValue, onChangeSearchInput, onAddToFavorites, onAddToCart, isLoading}) {
+function Home({items, searchValue, setSearchValue, onChangeSearchInput, onAddToFavorites, onAddToCart, isLoading}) {
 
   const renderItems = () => {
-
-    if (!items) {
-      return console.log('items undefined'); // or any other fallback you want to show when items is undefined
-    }
-
 
     const filteredItems = items.filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()));
     return (isLoading ? [...Array(8)] : filteredItems).map((item, index) => (
@@ -15,7 +10,6 @@ function Home({items, cartItems, searchValue, setSearchValue, onChangeSearchInpu
                 key={index}
                 onPlus={(obj) => onAddToCart(obj)}
                 onFavorite={(obj) => onAddToFavorites(obj)}
-                ifAdded={cartItems.some(obj => Number(obj.id) === Number(item.id))}
                 ifLoading={isLoading}
                 {...item}
               />

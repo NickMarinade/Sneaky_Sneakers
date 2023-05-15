@@ -1,4 +1,16 @@
+import { useContext, useState } from "react";
+import Info from "./Info";
+import AppContext from '../context';
+
 const Drawer = ({ onClose, onRemove, items = [] }) => {
+  const { setCartItems } = useContext(AppContext);
+  const [isOrderComplete, setIsOrderComplete] = useState(false);
+
+  const onClickOrder = () => {
+    setIsOrderComplete(true);
+    setCartItems([]);
+  }
+
   return (
     <div className="overlay">
       <div className="drawer">
@@ -50,26 +62,14 @@ const Drawer = ({ onClose, onRemove, items = [] }) => {
                   <b>17&#8364;</b>
                 </li>
               </ul>
-              <button className="greenButton">
+              <button onClick={onClickOrder} className="greenButton">
                 Proceed with order <img src="/img/arrow.svg" alt="Arrow" />
               </button>
             </div>
           </>
         ) : (
           <>
-            <div className="cartEmpty">
-              <img
-                width={120}
-                height={120}
-                src="/img/empty-cart.jpg"
-                alt="Empty-Cart"
-              />
-              <h2>Cart is empty</h2>
-              <p>Add something to make an order</p>
-              <button onClick={onClose} className="greenButton">
-                Back <img src="/img/arrow.svg" alt="Arrow" />
-              </button>
-            </div>
+            <Info title="Cart is empty" description="Add something" image="/img/empty-cart.jpg"/>
           </>
         )}
       </div>
