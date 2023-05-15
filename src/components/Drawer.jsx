@@ -1,15 +1,40 @@
 import { useContext, useState } from "react";
 import Info from "./Info";
-import AppContext from '../context';
+import AppContext from "../context";
+import axios from "axios";
+
+const delay = () => new Promise((resolve) => setTimeout(resolve, 1000));
 
 const Drawer = ({ onClose, onRemove, items = [] }) => {
-  const { setCartItems } = useContext(AppContext);
+  const { cartItems, setCartItems } = useContext(AppContext);
+  const [orderId, setOrderId] = useState(null);
   const [isOrderComplete, setIsOrderComplete] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const onClickOrder = () => {
-    setIsOrderComplete(true);
-    setCartItems([]);
-  }
+  const onClickOrder = async () => {
+    try {
+      setIsLoading(true);
+      const { data } = await axios.post(
+        "https://645e3b308d08100293fa31ac.mockapi.io/orders",
+        {
+          items: cartItems,
+        }
+      );
+      setOrderId(data.id);
+      setIsOrderComplete(true);
+      setCartItems([]);
+
+      for (let index = 0; index < cartItems.length; index++) { //because mockapi cant replace arrays
+        const item = cartItems[index];
+        await axios.delete('https://645b967399b618d5f31f8c71.mockapi.io/cart/' + item.id)
+        await delay();
+      }
+
+    } catch (error) {
+      alert("Failed to make an order");
+    }
+    setIsLoading(false);
+  };
 
   return (
     <div className="overlay">
@@ -29,12 +54,7 @@ const Drawer = ({ onClose, onRemove, items = [] }) => {
             <div className="items">
               {items.map((obj) => (
                 <div key={obj.id} className="cartItem">
-                  <img
-                    width={90}
-                    height={90}
-                    src={obj.imgUrl}
-                    alt="Sneakers"
-                  />
+                  <img width={90} height={90} src={obj.imgUrl} alt="Sneakers" />
                   <div className="cartItemPrice">
                     <p>{obj.title}</p>
                     <b>{obj.price}&#8364;</b>
@@ -62,17 +82,30 @@ const Drawer = ({ onClose, onRemove, items = [] }) => {
                   <b>17&#8364;</b>
                 </li>
               </ul>
-              <button onClick={onClickOrder} className="greenButton">
+              <button
+                disabled={isLoading}
+                onClick={onClickOrder}
+                className="greenButton"
+              >
                 Proceed with order <img src="/img/arrow.svg" alt="Arrow" />
               </button>
             </div>
           </>
         ) : (
           <>
-            <Info 
-            title={isOrderComplete ? "Order completed!" : "Cart is empty"} 
-            description={isOrderComplete? "We going to pass the order for delivery as soon as possible!" : "You have not added nothing yet"} 
-            image={isOrderComplete ? "/img/complete-order.jpg" : "/img/empty-cart.jpg"}/>
+            <Info
+              title={isOrderComplete ? "Order completed!" : "Cart is empty"}
+              description={
+                isOrderComplete
+                  ? `Your order #${orderId} is ready to be handled for delivery`
+                  : "You have not added nothing yet"
+              }
+              image={
+                isOrderComplete
+                  ? "/img/complete-order.jpg"
+                  : "/img/empty-cart.jpg"
+              }
+            />
           </>
         )}
       </div>
