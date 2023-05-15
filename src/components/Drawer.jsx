@@ -69,7 +69,10 @@ const Drawer = ({ onClose, onRemove, items = [] }) => {
           </>
         ) : (
           <>
-            <Info title="Cart is empty" description="Add something" image="/img/empty-cart.jpg"/>
+            <Info 
+            title={isOrderComplete ? "Order completed!" : "Cart is empty"} 
+            description={isOrderComplete? "We going to pass the order for delivery as soon as possible!" : "You have not added nothing yet"} 
+            image={isOrderComplete ? "/img/complete-order.jpg" : "/img/empty-cart.jpg"}/>
           </>
         )}
       </div>
