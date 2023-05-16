@@ -44,7 +44,7 @@ const Drawer = ({ onClose, onRemove, items = [] }) => {
           <img
             onClick={onClose}
             className="removeBtn"
-            src="img/btn-remove.svg"
+            src="verou-4-react-advanced-NickMarinade/img/btn-remove.svg"
             alt="Close"
           />
         </h2>
@@ -62,7 +62,7 @@ const Drawer = ({ onClose, onRemove, items = [] }) => {
                   <img
                     onClick={() => onRemove(obj.id)}
                     className="removeBtn"
-                    src="img/btn-remove.svg"
+                    src="verou-4-react-advanced-NickMarinade/img/btn-remove.svg"
                     alt="Remove"
                   />
                 </div>
@@ -87,7 +87,7 @@ const Drawer = ({ onClose, onRemove, items = [] }) => {
                 onClick={onClickOrder}
                 className="greenButton"
               >
-                Proceed with order <img src="img/arrow.svg" alt="Arrow" />
+                Proceed with order <img src="verou-4-react-advanced-NickMarinade/img/arrow.svg" alt="Arrow" />
               </button>
             </div>
           </>
@@ -102,8 +102,8 @@ const Drawer = ({ onClose, onRemove, items = [] }) => {
               }
               image={
                 isOrderComplete
-                  ? "img/complete-order.jpg"
-                  : "img/empty-cart.jpg"
+                  ? "verou-4-react-advanced-NickMarinade/img/complete-order.jpg"
+                  : "verou-4-react-advanced-NickMarinade/img/empty-cart.jpg"
               }
             />
           </>
