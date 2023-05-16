@@ -26,7 +26,7 @@ function Home({items, searchValue, setSearchValue, onChangeSearchInput, onAddToF
               : "All Sneakers"}
           </h1>
           <div className="search-block">
-            <img src="/img/search.svg" alt="Search" />
+            <img src="img/search.svg" alt="Search" />
             <input
               onChange={onChangeSearchInput}
               value={searchValue}
