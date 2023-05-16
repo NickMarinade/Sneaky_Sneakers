@@ -1,6 +1,11 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import AppContext from "../context";
 
 const Header = (props) => {
+  const { cartItems } = useContext(AppContext);
+  const totalPrice = cartItems.reduce((sum, obj) => obj.price + sum, 0);
+
   return (
     <header>
       <Link to="/">
@@ -23,7 +28,7 @@ const Header = (props) => {
               src="/img/cart.svg"
               alt="Cart"
             />{" "}
-            <span>127&#8364;</span>
+            <span>{totalPrice}&#8364;</span>
           </li>
           <li>
             <Link to="/favorites">
