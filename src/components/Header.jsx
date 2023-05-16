@@ -42,7 +42,15 @@ const Header = (props) => {
             </Link>
           </li>
           <li>
-            <img width={18} height={18} src="/img/user.svg" alt="User" />
+          <Link to="/orders">
+              <img
+                className="cartImg"
+                width={18}
+                height={18}
+                src="/img/user.svg"
+                alt="User"
+              />
+            </Link>
           </li>
         </ul>
       </div>
