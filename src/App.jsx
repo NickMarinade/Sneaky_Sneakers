@@ -111,6 +111,7 @@ function App() {
   };
 
   const onChangeSearchInput = (e) => {
+    e.preventDefault();
     setSearchValue(e.target.value);
   };
 
