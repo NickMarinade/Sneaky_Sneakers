@@ -54,7 +54,7 @@ body {
   }
 
   .overlay {
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     width: 100%;
@@ -335,14 +335,4 @@ body {
       }
     }
   }
-
-  // .button {
-  //   background: #ffffff;
-  //   border: 1px solid #f2f2f2;
-  //   box-sizing: border-box;
-  //   border-radius: 8px;
-  //   height: 32px;
-  //   width: 32px;
-  //   cursor: pointer;
-  // }
 }
