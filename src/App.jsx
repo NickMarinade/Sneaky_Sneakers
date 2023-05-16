@@ -50,22 +50,27 @@ function App() {
 
   const onAddToCart = async (obj) => {
     try {
-      if (cartItems.find((item) => Number(item.id) === Number(obj.id))) {
-        setCartItems((prev) =>
-          prev.filter((item) => Number(item.id) !== Number(obj.id))
-        );
-        await axios.delete(
-          `https://645b967399b618d5f31f8c71.mockapi.io/cart/${obj.id}`
-        );
+      const findItem = cartItems.find((item) => Number(item.parentId) === Number(obj.id));
+      if (findItem) {
+        setCartItems((prev) => prev.filter((item) => Number(item.parentId) !== Number(obj.id)));
+        await axios.delete(`https://645b967399b618d5f31f8c71.mockapi.io/cart/${findItem.id}`);
       } else {
-        const { data } = await axios.post(
-          "https://645b967399b618d5f31f8c71.mockapi.io/cart",
-          obj
+        setCartItems((prev) => [...prev, obj]);
+        const { data } = await axios.post('https://645b967399b618d5f31f8c71.mockapi.io/cart', obj);
+        setCartItems((prev) =>
+          prev.map((item) => {
+            if (item.parentId === data.parentId) {
+              return {
+                ...item,
+                id: data.id,
+              };
+            }
+            return item;
+          }),
         );
-        setCartItems((prev) => [...prev, data]);
       }
     } catch (error) {
-      alert("Error by adding to cart");
+      alert('Error by adding item to cart');
       console.error(error);
     }
   };
@@ -95,14 +100,12 @@ function App() {
     }
   };
 
-  const onRemoveItem = async (id) => {
+  const onRemoveItem = (id) => {
     try {
-      await axios.delete(
-        `https://645b967399b618d5f31f8c71.mockapi.io/cart/${id}`
-      );
-      setCartItems((prev) => prev.filter((item) => item.id !== id));
+      axios.delete(`https://645b967399b618d5f31f8c71.mockapi.io/cart/${id}`);
+      setCartItems((prev) => prev.filter((item) => Number(item.id) !== Number(id)));
     } catch (error) {
-      alert("Error by deleting data");
+      alert('Error deleting item from cart');
       console.error(error);
     }
   };
