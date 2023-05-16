@@ -19,42 +19,54 @@ function App() {
 
   useEffect(() => {
     async function fetchData() {
-      setIsLoading(true);
+      try {
+        setIsLoading(true);
 
-      const cartResponse = await axios.get(
-        "https://645b967399b618d5f31f8c71.mockapi.io/cart"
-      );
-      const favoritesResponse = await axios.get(
-        "https://645e3b308d08100293fa31ac.mockapi.io/favorites"
-      );
-      const itemsResponse = await axios.get(
-        "https://645b967399b618d5f31f8c71.mockapi.io/items"
-      );
+        const [ cartResponse, favoritesResponse, itemsResponse ] = await Promise.all([
+          axios.get(
+            "https://645b967399b618d5f31f8c71.mockapi.io/cart"
+          ),
+          axios.get(
+            "https://645e3b308d08100293fa31ac.mockapi.io/favorites"
+          ),
+          axios.get(
+            "https://645b967399b618d5f31f8c71.mockapi.io/items"
+          )
+        ]);
 
-      setIsLoading(false);
+        setIsLoading(false);
 
-      setCartItems(cartResponse.data);
-      setFavorites(favoritesResponse.data);
-      setItems(itemsResponse.data);
+        setCartItems(cartResponse.data);
+        setFavorites(favoritesResponse.data);
+        setItems(itemsResponse.data);
+      } catch (error) {
+        alert("Error by data request");
+        console.error(error);
+      }
     }
 
     fetchData();
   }, []);
 
   const onAddToCart = async (obj) => {
-    if (cartItems.find((item) => Number(item.id) === Number(obj.id))) {
-      await axios.delete(
-        `https://645b967399b618d5f31f8c71.mockapi.io/cart/${obj.id}`
-      );
-      setCartItems((prev) =>
-        prev.filter((item) => Number(item.id) !== Number(obj.id))
-      );
-    } else {
-      const { data } = await axios.post(
-        "https://645b967399b618d5f31f8c71.mockapi.io/cart",
-        obj
-      );
-      setCartItems((prev) => [...prev, data]);
+    try {
+      if (cartItems.find((item) => Number(item.id) === Number(obj.id))) {
+        setCartItems((prev) =>
+          prev.filter((item) => Number(item.id) !== Number(obj.id))
+        );
+        await axios.delete(
+          `https://645b967399b618d5f31f8c71.mockapi.io/cart/${obj.id}`
+        );
+      } else {
+        const { data } = await axios.post(
+          "https://645b967399b618d5f31f8c71.mockapi.io/cart",
+          obj
+        );
+        setCartItems((prev) => [...prev, data]);
+      }
+    } catch (error) {
+      alert("Error by adding to cart");
+      console.error(error);
     }
   };
 
@@ -84,10 +96,15 @@ function App() {
   };
 
   const onRemoveItem = async (id) => {
-    await axios.delete(
-      `https://645b967399b618d5f31f8c71.mockapi.io/cart/${id}`
-    );
-    setCartItems((prev) => prev.filter((item) => item.id !== id));
+    try {
+      await axios.delete(
+        `https://645b967399b618d5f31f8c71.mockapi.io/cart/${id}`
+      );
+      setCartItems((prev) => prev.filter((item) => item.id !== id));
+    } catch (error) {
+      alert("Error by deleting data");
+      console.error(error);
+    }
   };
 
   const onChangeSearchInput = (e) => {
@@ -95,7 +112,7 @@ function App() {
   };
 
   const isItemAdded = (id) => {
-    return cartItems.some((obj) => Number(obj.id) === Number(id));
+    return cartItems.some((obj) => Number(obj.parentId) === Number(id));
   };
 
   return (
@@ -108,7 +125,7 @@ function App() {
         onAddToFavorites,
         setCartOpened,
         setCartItems,
-        onAddToCart
+        onAddToCart,
       }}
     >
       <div className="wrapper">
@@ -142,7 +159,6 @@ function App() {
           <Route path="/favorites" exact element={<Favorites />} />
 
           <Route path="/orders" exact element={<Orders />} />
-
         </Routes>
       </div>
     </AppContext.Provider>
