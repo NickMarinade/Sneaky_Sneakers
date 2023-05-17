@@ -9,7 +9,7 @@ const Header = (props) => {
     <header>
       <Link to="/">
         <div className="headerLeft">
-          <img width={50} height={50} src="verou-4-react-advanced-NickMarinade/img/logo.png" alt="Logo" />
+          <img width={50} height={50} src="/img/logo.png" alt="Logo" />
           <div className="headerInfo">
             <h2>Sneaky Sneakers</h2>
             <p>Find your sneaky ones</p>
@@ -24,7 +24,7 @@ const Header = (props) => {
               className="cartImg"
               width={18}
               height={18}
-              src="verou-4-react-advanced-NickMarinade/img/cart.svg"
+              src="/img/cart.svg"
               alt="Cart"
             />{" "}
             <span>{totalPrice}&#8364;</span>
@@ -35,7 +35,7 @@ const Header = (props) => {
                 className="cartImg"
                 width={18}
                 height={18}
-                src="verou-4-react-advanced-NickMarinade/img/heart.svg"
+                src="/img/heart.svg"
                 alt="Favorites"
               />
             </Link>
@@ -46,7 +46,7 @@ const Header = (props) => {
                 className="cartImg"
                 width={18}
                 height={18}
-                src="verou-4-react-advanced-NickMarinade/img/user.svg"
+                src="/img/user.svg"
                 alt="User"
               />
             </Link>
