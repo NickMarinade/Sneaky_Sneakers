@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/verou-4-react-advanced-NickMarinade/static/css/main.3a1ddc7a.css",
-    "main.js": "/verou-4-react-advanced-NickMarinade/static/js/main.3ebf731d.js",
-    "index.html": "/verou-4-react-advanced-NickMarinade/index.html",
-    "main.3a1ddc7a.css.map": "/verou-4-react-advanced-NickMarinade/static/css/main.3a1ddc7a.css.map",
-    "main.3ebf731d.js.map": "/verou-4-react-advanced-NickMarinade/static/js/main.3ebf731d.js.map"
+    "main.css": "/static/css/main.3a1ddc7a.css",
+    "main.js": "/static/js/main.6ad1067c.js",
+    "index.html": "/index.html",
+    "main.3a1ddc7a.css.map": "/static/css/main.3a1ddc7a.css.map",
+    "main.6ad1067c.js.map": "/static/js/main.6ad1067c.js.map"
   },
   "entrypoints": [
     "static/css/main.3a1ddc7a.css",
-    "static/js/main.3ebf731d.js"
+    "static/js/main.6ad1067c.js"
   ]
 }
