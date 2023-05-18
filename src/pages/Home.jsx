@@ -1,6 +1,6 @@
 import Card from "../components/Card";
 
-function Home({items, searchValue, setSearchValue, onChangeSearchInput, onAddToFavorites, onAddToCart, isLoading}) {
+function Home({items, searchValue, onChangeSearchInput, onAddToFavorites, onAddToCart, isLoading}) {
 
   const renderItems = () => {
 
