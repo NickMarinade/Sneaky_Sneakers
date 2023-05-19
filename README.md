@@ -1,6 +1,6 @@
 ## Links
 
-[App Link]([https://markdownlivepreview.com/](https://becodeorg.github.io/verou-4-react-advanced-NickMarinade/)).
+[App Link]([https://becodeorg.github.io/verou-4-react-advanced-NickMarinade/]).
 
 # Sneaky Sneakers Webshop
 
